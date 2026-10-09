@@ -16,9 +16,10 @@
         {{-- HERO --}}
         <section class="hero" id="beranda">
             <header class="site-header">
-                <a class="brand brand-header" href="{{ route('home') }}" aria-label="Fahira Wedding beranda">
-                    <img src="{{ asset('images/logo-fahira.png') }}" alt="Fahira Wedding" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <span class="brand-fallback">FW<small>Fahira Wedding</small></span>
+                <a class="brand brand-header" href="{{ route('home') }}"
+                        aria-label="Fahira Wedding beranda">
+                        <img src="{{ asset('images/logo-fahira.png') }}"
+                        alt="Fahira Wedding">
                 </a>
 
                 <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
@@ -36,7 +37,6 @@
             <div class="hero-copy">
                 <h1>FAHIRA WEDDING</h1>
                 <p>Sempurnakan Hari Bahagia Anda dengan Sentuhan Elegan<br class="desktop-only"> yang Mengubah Setiap Momen Menjadi Kenangan.</p>
-                <div class="ornament-lines"><span></span><span></span></div>
             </div>
         </section>
 
@@ -111,9 +111,10 @@
 
             {{-- CTA WHATSAPP --}}
             <div class="whatsapp-cta" id="konsultasi">
-                <a class="brand cta-brand" href="#beranda" aria-label="Kembali ke beranda">
-                    <img src="{{ asset('images/logo-fahira.png') }}" alt="Fahira Wedding" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <span class="brand-fallback">FW<small>Fahira Wedding</small></span>
+                <a class="brand cta-brand" href="#beranda"
+                    aria-label="Kembali ke beranda">
+                    <img src="{{ asset('images/logo-fahira.png') }}"
+                        alt="Fahira Wedding">
                 </a>
                 <div class="cta-copy">
                     <h2>Masih bingung memilih paket yang cocok</h2>
@@ -129,10 +130,14 @@
 
         {{-- FOOTER --}}
         <footer class="footer">
+            
             <div class="footer-brand">
-                <img src="{{ asset('images/logo-footer.png') }}" alt="Fahira Wedding" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                <span class="footer-wordmark">FAHIRA WEDDING</span>
-                <p>Pilihan terbaik untuk solusi<br>acara pernikahan anda</p>
+                <img
+                    src="{{ asset('images/logo-footer.png') }}"
+                    alt="Fahira Wedding"
+                    class="footer-logo"
+                >
+
                 <small>Copyright © {{ date('Y') }}</small>
             </div>
             <div class="footer-column">
