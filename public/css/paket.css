@@ -1,0 +1,654 @@
+
+/* =====================================
+   FAHIRA WEDDING - HALAMAN PAKET
+   ===================================== */
+
+.paket-page {
+    --paket-cream: #e8e3d7;
+    --paket-wine: #b50f32;
+    --paket-dark: #5b091b;
+    --paket-border: #a64c59;
+    margin: 0;
+    background: var(--paket-cream);
+    color: #25221e;
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.paket-page *,
+.paket-page *::before,
+.paket-page *::after {
+    box-sizing: border-box;
+}
+
+.paket-page a {
+    text-decoration: none;
+}
+
+/* HEADER */
+
+.paket-header {
+    position: relative;
+    z-index: 10;
+    min-height: 70px;
+    padding: 3px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #39372d;
+    color: #fff;
+    border-bottom: 1px solid #8c8066;
+}
+
+.paket-header .brand-header {
+    flex: 0 0 75px;
+    width: 75px;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paket-header .brand-header img {
+    display: block;
+    width: 70px;
+    height: 58px;
+    object-fit: contain;
+}
+
+.paket-header .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.paket-header .navigation a {
+    color: #fff;
+    padding: 5px 3px;
+    border-radius: 20px;
+}
+
+.paket-header .navigation a.active {
+    padding: 4px 10px;
+    color: var(--paket-wine);
+    background: #fff;
+}
+
+.paket-header .navigation a:hover {
+    color: #f0c5a0;
+}
+
+.paket-header .navigation a.active:hover {
+    color: var(--paket-wine);
+}
+
+.paket-header .menu-toggle {
+    display: none;
+}
+
+/* HERO */
+
+.paket-hero {
+    min-height: 185px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: #f5f1ee;
+    background:
+        #454239 url("../images/hero-paket.jpg")
+        center 48% / cover no-repeat;
+}
+
+.paket-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .52);
+}
+
+.paket-hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 20px 5%;
+}
+
+.paket-hero-content h1 {
+    margin: 0;
+    font-size: clamp(32px, 5vw, 44px);
+    font-weight: 500;
+    line-height: 1.05;
+}
+
+.paket-hero-content p {
+    margin: 4px 0 0;
+    font-size: clamp(13px, 2vw, 17px);
+    line-height: 1.2;
+}
+
+/* AREA PAKET */
+
+.paket-main {
+    min-height: 0;
+    padding: 38px 4.2% 85px;
+}
+
+/* FILTER KATEGORI */
+
+.paket-filters {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 1000px;
+    margin: 0 auto 29px;
+}
+
+.filter-btn {
+    min-height: 25px;
+    padding: 3px 10px;
+    border: 1px solid #d6d0c5;
+    border-radius: 7px;
+    background: #fff;
+    color: #171613;
+    font: 500 14px "Cormorant Garamond", Georgia, serif;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.filter-btn.active {
+    color: #fff;
+    background: var(--paket-wine);
+    border-color: var(--paket-wine);
+}
+
+.filter-btn:hover {
+    border-color: var(--paket-wine);
+}
+
+/* GRID DAN KARTU */
+
+.paket-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 9%;
+    row-gap: 53px;
+    max-width: 920px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.paket-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    align-self: start;
+    border: 1px solid var(--paket-border);
+    background: var(--paket-cream);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .08);
+}
+
+.paket-image {
+    width: 100%;
+    aspect-ratio: 1 / 1.07;
+    overflow: hidden;
+    background: #252522;
+    border-bottom: 1px solid #b7afa4;
+}
+
+.paket-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.paket-card-content {
+    padding: 5px 9px 10px;
+}
+
+/* TAG FITUR */
+
+.paket-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3px 5px;
+    min-height: 22px;
+    margin-bottom: 7px;
+}
+
+.paket-tags span {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 6px;
+    border: 1px solid var(--paket-wine);
+    border-radius: 12px;
+    background: #fff;
+    color: #28221e;
+    font-size: 10px;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.paket-tags b {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 11px;
+    height: 11px;
+    border: 1px solid #dc3150;
+    border-radius: 50%;
+    color: #c21a3a;
+    font: 8px Arial, sans-serif;
+}
+
+/* DESKRIPSI DAN HARGA */
+
+.paket-description {
+    min-height: 34px;
+    margin: 4px 0 4px;
+    color: #5b5752;
+    font-size: 15px;
+    line-height: 1.08;
+    letter-spacing: .15px;
+}
+
+.paket-price {
+    margin: 5px 0 8px;
+    color: #980b29;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* TOMBOL */
+
+.paket-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 13px;
+    align-items: center;
+    gap: 7px;
+}
+
+.paket-btn {
+    min-width: 0;
+    min-height: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 5px;
+    border: 1px solid var(--paket-wine);
+    border-radius: 7px;
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background .2s, color .2s;
+}
+
+.paket-btn-primary {
+    background: linear-gradient(100deg, #650b20, #c31538);
+    color: #fff;
+}
+
+.paket-btn-primary:hover {
+    background: #510719;
+    color: #fff;
+}
+
+.paket-btn-outline {
+    background: #fff;
+    color: #7c0b24;
+}
+
+.paket-btn-outline:hover {
+    background: #f8dfe4;
+    color: #650b20;
+}
+
+.paket-arrow {
+    color: #25221e;
+    font: 20px Arial, sans-serif;
+    text-align: center;
+}
+
+/* KARTU TERAKHIR DI TENGAH */
+
+.paket-card-last {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - 9%) / 2);
+}
+
+/* BANNER WHATSAPP */
+
+.paket-cta {
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(105deg, #5c091b, #c31637);
+}
+
+.paket-cta-inner {
+    max-width: 1050px;
+    min-height: 130px;
+    margin: 0 auto;
+    padding: 24px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid rgba(240, 204, 154, .3);
+}
+
+.paket-cta-inner h2 {
+    margin: 0 0 2px;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.paket-cta-inner p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.paket-whatsapp {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 10px;
+    background: #fff;
+    color: #850d28;
+    font-size: 19px;
+    line-height: 1.1;
+}
+
+.paket-whatsapp:hover {
+    background: #f4e9e8;
+}
+
+/* FOOTER */
+
+.paket-footer {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr 1fr 1fr;
+    gap: 22px;
+    min-height: 140px;
+    padding: 17px 4% 24px;
+    border: 1px solid #c18a94;
+    background: #d8b9bd;
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.paket-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.paket-footer-brand img {
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    height: 70px;
+    object-fit: contain;
+}
+
+.paket-footer-brand small {
+    font-family: Arial, sans-serif;
+    font-size: 6px;
+    color: #766a68;
+}
+
+.paket-footer-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 18px;
+    border-left: 1px solid #ef9d51;
+}
+
+.paket-footer-column::before,
+.paket-footer-column::after {
+    content: "✦";
+    position: absolute;
+    left: -4px;
+    color: #ef9d51;
+    font-size: 9px;
+}
+
+.paket-footer-column::before {
+    top: -5px;
+}
+
+.paket-footer-column::after {
+    bottom: -5px;
+}
+
+.paket-footer-column h3 {
+    margin: 0;
+    color: #e78336;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.paket-footer-column a {
+    color: #5b514e;
+    font-size: 10px;
+    line-height: 1.1;
+}
+
+.paket-footer-column a:hover {
+    color: var(--paket-wine);
+    text-decoration: underline;
+}
+
+/* TABLET */
+
+@media (min-width: 700px) {
+    .paket-header {
+        padding-right: 3.5%;
+        padding-left: 3.5%;
+    }
+
+    .paket-hero {
+        min-height: 185px;
+    }
+
+    .paket-main {
+        padding-top: 38px;
+        padding-bottom: 85px;
+    }
+
+    .paket-grid {
+        row-gap: 53px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 699px) {
+    .paket-header {
+        min-height: 65px;
+        padding: 4px 16px;
+    }
+
+    .paket-header .brand-header {
+        flex-basis: 65px;
+        width: 65px;
+    }
+
+    .paket-header .brand-header img {
+        width: 62px;
+        height: 55px;
+    }
+
+    .paket-header .menu-toggle {
+        display: block;
+        padding: 6px 10px;
+        border: 1px solid #938b76;
+        border-radius: 5px;
+        background: transparent;
+        color: #fff;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .paket-header .navigation {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 12px 18px;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 7px;
+        background: #39372d;
+        white-space: normal;
+    }
+
+    .paket-header .navigation.open {
+        display: flex;
+    }
+
+    .paket-header .navigation a {
+        padding: 8px 10px;
+    }
+
+    .paket-header .navigation a.active {
+        align-self: flex-start;
+    }
+
+    .paket-hero {
+        min-height: 170px;
+    }
+
+    .paket-hero-content {
+        padding: 22px 20px;
+    }
+
+    .paket-hero-content h1 {
+        font-size: 34px;
+    }
+
+    .paket-hero-content p {
+        max-width: 310px;
+        font-size: 14px;
+    }
+
+    .paket-main {
+        padding: 25px 14px 55px;
+    }
+
+    .paket-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        margin-bottom: 24px;
+    }
+
+    .paket-filters .filter-btn:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .filter-btn {
+        min-height: 32px;
+        font-size: 14px;
+    }
+
+    .paket-grid {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 340px;
+        gap: 30px;
+    }
+
+    .paket-card-last {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .paket-image {
+        aspect-ratio: 1 / 1.04;
+    }
+
+    .paket-card-content {
+        padding: 8px 10px 11px;
+    }
+
+    .paket-description {
+        font-size: 16px;
+    }
+
+    .paket-price {
+        font-size: 14px;
+    }
+
+    .paket-btn {
+        min-height: 29px;
+        font-size: 14px;
+    }
+
+    .paket-cta-inner {
+        min-height: 145px;
+        padding: 22px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .paket-cta-inner h2 {
+        font-size: 18px;
+    }
+
+    .paket-cta-inner p {
+        font-size: 14px;
+    }
+
+    .paket-whatsapp {
+        font-size: 17px;
+    }
+
+    .paket-footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px 15px;
+        padding: 22px 18px 28px;
+    }
+
+    .paket-footer-brand {
+        min-height: 100px;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .paket-footer-brand img {
+        height: 65px;
+    }
+
+    .paket-footer-column {
+        padding-left: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .paket-page *,
+    .paket-page *::before,
+    .paket-page *::after {
+        scroll-behavior: auto;
+        transition: none;
+    }
+}

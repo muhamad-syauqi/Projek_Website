@@ -25,7 +25,7 @@
                 <button class="menu-toggle" type="button" aria-label="Buka menu" aria-expanded="false">☰</button>
                 <nav class="navigation" aria-label="Navigasi utama">
                     <a class="active" href="#beranda">Beranda</a>
-                    <a href="#paket">Paket</a>
+                    <a href="paket">Paket</a>
                     <a href="#calculator">Wedding Calculator</a>
                     <a href="#tentang">Tentang</a>
                     <a href="#galeri">Galeri</a>
