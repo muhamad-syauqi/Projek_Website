@@ -17,24 +17,7 @@
 </head>
 <body class="paket-page detail-page">
 
-    {{-- HEADER (sama dengan halaman paket) --}}
-    <header class="site-header paket-header" id="beranda">
-        <a class="brand brand-header" href="{{ route('home') }}">
-            <img src="{{ asset('images/logo-fahira.png') }}" alt="Fahira Wedding">
-        </a>
-
-        <button class="menu-toggle" type="button"
-            aria-label="Buka menu" aria-expanded="false">☰</button>
-
-        <nav class="navigation" aria-label="Navigasi utama">
-            <a href="{{ route('home') }}">Beranda</a>
-            <a class="active" href="{{ route('paket') }}">Paket</a>
-            <a href="{{ url('/wedding-calculator') }}">Wedding Calculator</a>
-            <a href="{{ route('home') }}#tentang">Tentang</a>
-            <a href="{{ url('/galeri') }}">Galeri</a>
-            <a href="{{ route('home') }}#konsultasi">Konsultasi</a>
-        </nav>
-    </header>
+    @include('partials.header')
 
     <main class="detail-wrap">
         <article class="detail-card">

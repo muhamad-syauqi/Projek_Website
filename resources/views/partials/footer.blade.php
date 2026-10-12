@@ -11,7 +11,7 @@
             <a href="{{ route('paket') }}">Paket</a>
             <a href="{{ url('/wedding-calculator') }}">Wedding calculator</a>
             <a href="{{ url('/galeri') }}">Galeri</a>
-            <a href="{{ route('home') }}#tentang">Tentang</a>
+            <a href="{{ route('tentang') }}">Tentang</a>
             <a href="{{ route('home') }}#konsultasi">Konsultasi</a>
         </div>
 

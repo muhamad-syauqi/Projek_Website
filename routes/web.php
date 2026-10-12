@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 // Halaman publik
 Route::view('/', 'home')->name('home');
 
+Route::view('/tentang', 'tentang')->name('tentang');
+
 Route::get('/paket', function () {
     $packages = Package::where('is_active', true)
         ->orderBy('sort_order')

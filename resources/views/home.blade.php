@@ -27,7 +27,7 @@
                     <a class="active" href="#beranda">Beranda</a>
                     <a href="paket">Paket</a>
                     <a href="#calculator">Wedding Calculator</a>
-                    <a href="#tentang">Tentang</a>
+                    <a href="tentang">Tentang</a>
                     <a href="#galeri">Galeri</a>
                     <a href="#konsultasi">Konsultasi</a>
                 </nav>
