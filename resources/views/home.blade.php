@@ -9,8 +9,8 @@
     {{-- Font elegan; hapus jika ingin memakai font lokal/offline --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <body>
     <main>
         {{-- HERO --}}
@@ -30,7 +30,6 @@
                     <a href="#tentang">Tentang</a>
                     <a href="#galeri">Galeri</a>
                     <a href="#konsultasi">Konsultasi</a>
-                    <a class="phone-link" href="#konsultasi" aria-label="Telepon">♧</a>
                 </nav>
             </header>
 
@@ -66,7 +65,7 @@
                 <div class="photo-collage">
                     <img class="photo-back" src="{{ asset('images/foto-pengantin-2.jpg') }}" alt="Momen pernikahan">
                     <img class="photo-front" src="{{ asset('images/foto-pengantin-1.jpg') }}" alt="Pasangan pengantin">
-                    <div class="photo-count"><strong>100<sup>+</sup></strong><small>Happy Moments</small></div>
+                    <div class="photo-count"><strong>100<sup>+</sup></strong><small>Event Successful</small></div>
                 </div>
                 <div class="commitment-copy">
                     <h2>Kami berkomitmen untuk menjadikan<br class="desktop-only"> pernikahan Anda tak terlupakan.</h2>
@@ -128,44 +127,9 @@
             <div class="section-rule"></div>
         </section>
 
-        {{-- FOOTER --}}
-        <footer class="footer">
-            
-            <div class="footer-brand">
-                <img
-                    src="{{ asset('images/logo-footer.png') }}"
-                    alt="Fahira Wedding"
-                    class="footer-logo"
-                >
-
-                <small>Copyright © {{ date('Y') }}</small>
-            </div>
-            <div class="footer-column">
-                <h3>Menu</h3>
-                <a href="#beranda">Beranda</a>
-                <a href="#paket">Paket</a>
-                <a href="#calculator">Wedding calculator</a>
-                <a href="#galeri">Galeri</a>
-                <a href="#tentang">Tentang</a>
-                <a href="#konsultasi">Konsultasi</a>
-            </div>
-            <div class="footer-column">
-                <h3>Layanan</h3>
-                <a href="#layanan">Wedding Organizer</a>
-                <a href="#layanan">Dekorasi</a>
-                <a href="#layanan">Catering</a>
-                <a href="#layanan">Dokumentasi</a>
-                <a href="#layanan">Entertainment</a>
-                <a href="#layanan">MUA dan Busana</a>
-            </div>
-            <div class="footer-column social-column">
-                <h3>Sosial Media</h3>
-                <a href="#" aria-label="Facebook">f&nbsp; Facebook</a>
-                <a href="#" aria-label="Twitter">♥&nbsp; Twitter</a>
-                <a href="#" aria-label="Instagram">◎&nbsp; Instagram</a>
-            </div>
-        </footer>
+              @include('partials.footer')
     </main>
+
     <script src="{{ asset('js/home.js') }}"></script>
 </body>
 </html>

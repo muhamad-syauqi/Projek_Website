@@ -9,7 +9,8 @@
 
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/paket.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -95,11 +96,11 @@
                            data-package="Paket Cinta">
                             Pilih Paket
                         </a>
-                        <a class="paket-btn paket-btn-outline"
-                           href="#konsultasi"
-                           data-package="Paket Cinta">
-                            Detail
-                        </a>
+                        <a class="paket-btn paket-btn-outline" href="{{ route('paket.detail', 'cinta') }}">
+    Detail
+</a>
+<a class="paket-arrow" href="{{ route('paket.detail', 'cinta') }}"
+   
                         <a class="paket-arrow" href="#konsultasi"
                            data-package="Paket Cinta" aria-label="Detail Paket Cinta">↳</a>
                     </div>
@@ -146,7 +147,7 @@
             {{-- PAKET 3 --}}
             <article class="paket-card" data-category="impian">
                 <div class="paket-image">
-                    <img src="{{ asset('images/paket-impian.jpg') }}"
+                    <img src="{{ asset('images/paket/paket-ketiga.jpg') }}"
                          alt="Paket Wedding Impian">
                 </div>
 
@@ -184,7 +185,7 @@
             {{-- PAKET 4 --}}
             <article class="paket-card" data-category="bahagia">
                 <div class="paket-image">
-                    <img src="{{ asset('images/paket-lainnya.jpg') }}"
+                    <img src="{{ asset('images/paket/paket-keempat.jpg') }}"
                          alt="Paket Wedding Resepsi">
                 </div>
 
@@ -210,8 +211,6 @@
                            href="#konsultasi" data-package="Paket Resepsi">
                             Detail
                         </a>
-                        <a class="paket-arrow" href="#konsultasi"
-                           data-package="Paket Resepsi" aria-label="Detail Paket Resepsi">↳</a>
                     </div>
                 </div>
             </article>
@@ -219,7 +218,7 @@
             {{-- PAKET 5 --}}
             <article class="paket-card paket-card-last" data-category="lainnya">
                 <div class="paket-image">
-                    <img src="{{ asset('images/paket-makeup-attire.jpg') }}"
+                    <img src="{{ asset('images/paket/paket-kelima.jpg') }}"
                          alt="Paket Makeup dan Attire">
                 </div>
 
@@ -269,41 +268,7 @@
         </div>
     </section>
 
-    {{-- FOOTER --}}
-    <footer class="paket-footer">
-        <div class="paket-footer-brand">
-            <img src="{{ asset('images/logo-footer.png') }}"
-                 alt="Fahira Wedding">
-            <small>Copyright © {{ date('Y') }}</small>
-        </div>
-
-        <div class="paket-footer-column">
-            <h3>Menu</h3>
-            <a href="{{ route('home') }}">Beranda</a>
-            <a href="{{ route('paket') }}">Paket</a>
-            <a href="{{ url('/wedding-calculator') }}">Wedding calculator</a>
-            <a href="{{ url('/galeri') }}">Galeri</a>
-            <a href="{{ route('home') }}#tentang">Tentang</a>
-            <a href="#konsultasi">Konsultasi</a>
-        </div>
-
-        <div class="paket-footer-column">
-            <h3>Layanan</h3>
-            <a href="#paket">Wedding Organizer</a>
-            <a href="#paket">Dekorasi</a>
-            <a href="#paket">Catering</a>
-            <a href="#paket">Dokumentasi</a>
-            <a href="#paket">Entertainment</a>
-            <a href="#paket">MUA dan Busana</a>
-        </div>
-
-        <div class="paket-footer-column">
-            <h3>Sosial Media</h3>
-            <a href="#" aria-label="Facebook">f &nbsp; Facebook</a>
-            <a href="#" aria-label="Twitter">♥ &nbsp; Twitter</a>
-            <a href="#" aria-label="Instagram">◎ &nbsp; Instagram</a>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <script src="{{ asset('js/home.js') }}"></script>
     <script src="{{ asset('js/paket.js') }}"></script>
