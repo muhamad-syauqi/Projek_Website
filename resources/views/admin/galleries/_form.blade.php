@@ -30,6 +30,15 @@
             <div class="help">Angka kecil tampil lebih dulu.</div>
         </div>
 
+        <div class="f">
+            <label for="taken_at">Tanggal acara <i>*</i></label>
+            <input type="date" id="taken_at" name="taken_at"
+                   value="{{ old('taken_at', $gallery->taken_at?->format('Y-m-d') ?? now()->format('Y-m-d')) }}"
+                   class="@error('taken_at') invalid @enderror" required>
+            <div class="help">Bulan dari tanggal ini dipakai sebagai filter di halaman Galeri.</div>
+            @error('taken_at') <div class="msg">{{ $message }}</div> @enderror
+        </div>
+
         <label class="sw" for="is_active">
             <div>
                 <b>Tampilkan di website</b>

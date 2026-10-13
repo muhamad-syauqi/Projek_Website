@@ -10,6 +10,7 @@ class Gallery extends Model
         'title',
         'image',
         'description',
+        'taken_at',
         'is_active',
         'sort_order',
     ];
@@ -18,6 +19,7 @@ class Gallery extends Model
     {
         return [
             'is_active' => 'boolean',
+            'taken_at' => 'date',
         ];
     }
 }

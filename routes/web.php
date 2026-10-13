@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\GalleryPageController;
 use App\Models\Gallery;
 use App\Models\Package;
 use Illuminate\Support\Facades\Route;
@@ -40,14 +41,7 @@ Route::get('/paket/{slug}', function (string $slug) {
     ]);
 })->name('paket.detail');
 
-Route::get('/galeri', function () {
-    $galleries = Gallery::where('is_active', true)
-        ->orderBy('sort_order')
-        ->orderByDesc('created_at')
-        ->paginate(12);
-
-    return view('galeri', compact('galleries'));
-})->name('galeri');
+Route::get('/galeri', [GalleryPageController::class, 'index'])->name('galeri');
 
 // Login admin
 Route::prefix('admin')->name('admin.')->group(function () {

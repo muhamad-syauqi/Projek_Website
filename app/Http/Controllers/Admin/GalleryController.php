@@ -23,6 +23,7 @@ class GalleryController extends Controller
                 fn ($query) => $query->where('is_active', false)
             )
             ->orderBy('sort_order')
+            ->orderByDesc('taken_at')
             ->orderByDesc('created_at')
             ->paginate(12)
             ->withQueryString();
@@ -48,6 +49,7 @@ class GalleryController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['nullable', 'string', 'max:2000'],
+            'taken_at' => ['required', 'date'],
             'image' => [
                 'required',
                 'image',
@@ -81,6 +83,7 @@ class GalleryController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
             'description' => ['nullable', 'string', 'max:2000'],
+            'taken_at' => ['required', 'date'],
             'image' => [
                 'nullable',
                 'image',

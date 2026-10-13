@@ -518,6 +518,7 @@ tbody tr:hover td { background: #fcfaf3; }
 .f input[type="number"],
 .f input[type="email"],
 .f input[type="password"],
+.f input[type="date"],
 .f select,
 .f textarea {
     width: 100%;
