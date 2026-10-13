@@ -11,11 +11,33 @@ use Illuminate\Validation\Rule;
 
 class PackageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $packages = Package::orderBy('sort_order')
+        $packages = Package::query()
+            ->when(
+                $request->filled('q'),
+                fn ($query) => $query->where(
+                    'name',
+                    'like',
+                    '%' . $request->string('q')->trim() . '%'
+                )
+            )
+            ->when(
+                $request->filled('category'),
+                fn ($query) => $query->where('category', $request->input('category'))
+            )
+            ->when(
+                $request->input('status') === 'aktif',
+                fn ($query) => $query->where('is_active', true)
+            )
+            ->when(
+                $request->input('status') === 'nonaktif',
+                fn ($query) => $query->where('is_active', false)
+            )
+            ->orderBy('sort_order')
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.packages.index', compact('packages'));
     }

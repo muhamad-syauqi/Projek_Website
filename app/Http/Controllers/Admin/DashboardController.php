@@ -15,6 +15,8 @@ class DashboardController extends Controller
             'totalGaleri' => Gallery::count(),
             'paketAktif' => Package::where('is_active', true)->count(),
             'galeriAktif' => Gallery::where('is_active', true)->count(),
+            'latestPackages' => Package::latest()->take(4)->get(),
+            'latestGalleries' => Gallery::latest()->take(4)->get(),
         ]);
     }
 }

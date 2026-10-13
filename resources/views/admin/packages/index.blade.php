@@ -1,23 +1,52 @@
 @extends('admin.layout')
 
 @section('title', 'Kelola Paket')
+@section('crumb', 'Admin / Kelola Paket')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Kelola Paket Wedding</h1>
-        <a href="{{ route('admin.packages.create') }}"
-           class="btn btn-dark">+ Tambah Paket</a>
+    <div class="page-head">
+        <div>
+            <h2 class="serif">Kelola Paket Wedding</h2>
+            <p>Atur paket yang tampil di halaman Paket dan Detail Paket.</p>
+        </div>
+
+        <a class="btn btn-wine" href="{{ route('admin.packages.create') }}">
+            <x-admin.icon name="plus" />Tambah Paket
+        </a>
     </div>
 
-    <div class="card border-0 shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-dark">
+    <div class="card">
+        {{-- Pencarian dan filter --}}
+        <form class="bar" method="GET" action="{{ route('admin.packages.index') }}">
+            <label class="search">
+                <x-admin.icon name="search" />
+                <input type="text" name="q" value="{{ request('q') }}"
+                       placeholder="Cari nama paket…" aria-label="Cari nama paket">
+            </label>
+
+            <select class="sel" name="category" aria-label="Filter kategori" onchange="this.form.submit()">
+                <option value="">Semua kategori</option>
+                @foreach (['cinta' => 'Cinta', 'bahagia' => 'Bahagia', 'impian' => 'Impian', 'lainnya' => 'Lainnya'] as $value => $label)
+                    <option value="{{ $value }}" @selected(request('category') === $value)>{{ $label }}</option>
+                @endforeach
+            </select>
+
+            <select class="sel" name="status" aria-label="Filter status" onchange="this.form.submit()">
+                <option value="">Semua status</option>
+                <option value="aktif" @selected(request('status') === 'aktif')>Aktif</option>
+                <option value="nonaktif" @selected(request('status') === 'nonaktif')>Nonaktif</option>
+            </select>
+        </form>
+
+        <div class="tbl">
+            <table>
+                <thead>
                     <tr>
                         <th>Foto</th>
                         <th>Nama Paket</th>
                         <th>Kategori</th>
                         <th>Harga</th>
+                        <th style="text-align:center">Urutan</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -25,51 +54,68 @@
                 <tbody>
                     @forelse ($packages as $package)
                         <tr>
-                            <td>
+                            <td style="width:110px">
                                 @if ($package->image)
-                                    <img src="{{ asset('storage/'.$package->image) }}"
-                                         width="75" height="55"
-                                         style="object-fit:cover" alt="">
+                                    <img class="thumb" src="{{ asset('storage/'.$package->image) }}" alt="{{ $package->name }}">
                                 @else
-                                    <span class="text-muted">Belum ada foto</span>
+                                    <div class="nophoto">Belum ada foto</div>
                                 @endif
                             </td>
-                            <td>{{ $package->name }}</td>
-                            <td>{{ ucfirst($package->category) }}</td>
-                            <td>Rp {{ number_format($package->price, 0, ',', '.') }}</td>
-                            <td>
-                                @if ($package->is_active)
-                                    <span class="badge bg-success">Aktif</span>
-                                @else
-                                    <span class="badge bg-secondary">Nonaktif</span>
-                                @endif
+                            <td class="name">
+                                <b>{{ $package->name }}</b>
+                                <small>/paket/{{ $package->slug }}</small>
                             </td>
+                            <td><span class="cat">{{ ucfirst($package->category) }}</span></td>
+                            <td class="price">Rp {{ number_format($package->price, 0, ',', '.') }}</td>
+                            <td style="text-align:center;font-weight:700;color:var(--muted)">{{ $package->sort_order }}</td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ route('admin.packages.edit', $package) }}"
-                                       class="btn btn-sm btn-warning">Edit</a>
+                                <span class="pill {{ $package->is_active ? 'on' : 'off' }}">
+                                    {{ $package->is_active ? 'Aktif' : 'Nonaktif' }}
+                                </span>
+                            </td>
+                            <td style="width:110px">
+                                <div class="acts">
+                                    <a class="iconbtn" href="{{ route('admin.packages.edit', $package) }}"
+                                       aria-label="Edit {{ $package->name }}" title="Edit">
+                                        <x-admin.icon name="edit" />
+                                    </a>
 
-                                    <form method="POST"
-                                          action="{{ route('admin.packages.destroy', $package) }}"
+                                    <form method="POST" action="{{ route('admin.packages.destroy', $package) }}"
                                           onsubmit="return confirm('Hapus paket ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                        <button class="iconbtn del" type="submit"
+                                                aria-label="Hapus {{ $package->name }}" title="Hapus">
+                                            <x-admin.icon name="trash" />
+                                        </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center py-4">
-                                Belum ada paket. Klik Tambah Paket untuk mulai.
+                            <td colspan="7" class="empty">
+                                @if (request()->hasAny(['q', 'category', 'status']))
+                                    Tidak ada paket yang cocok dengan pencarian.
+                                @else
+                                    Belum ada paket. Klik Tambah Paket untuk mulai.
+                                @endif
                             </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <div class="mt-3">{{ $packages->links() }}</div>
+        <div class="pg">
+            <span>
+                @if ($packages->total() > 0)
+                    Menampilkan {{ $packages->firstItem() }}–{{ $packages->lastItem() }} dari {{ $packages->total() }} paket
+                @else
+                    0 paket
+                @endif
+            </span>
+            {{ $packages->links('vendor.pagination.admin') }}
+        </div>
+    </div>
 @endsection

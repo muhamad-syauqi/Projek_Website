@@ -9,18 +9,38 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $galleries = Gallery::orderBy('sort_order')
-            ->orderByDesc('created_at')
-            ->paginate(12);
+        $status = $request->query('status');
 
-        return view('admin.galleries.index', compact('galleries'));
+        $galleries = Gallery::query()
+            ->when(
+                $status === 'aktif',
+                fn ($query) => $query->where('is_active', true)
+            )
+            ->when(
+                $status === 'nonaktif',
+                fn ($query) => $query->where('is_active', false)
+            )
+            ->orderBy('sort_order')
+            ->orderByDesc('created_at')
+            ->paginate(12)
+            ->withQueryString();
+
+        $counts = [
+            'semua' => Gallery::count(),
+            'aktif' => Gallery::where('is_active', true)->count(),
+            'nonaktif' => Gallery::where('is_active', false)->count(),
+        ];
+
+        return view('admin.galleries.index', compact('galleries', 'counts', 'status'));
     }
 
     public function create()
     {
-        return view('admin.galleries.create');
+        return view('admin.galleries.create', [
+            'gallery' => new Gallery(),
+        ]);
     }
 
     public function store(Request $request)

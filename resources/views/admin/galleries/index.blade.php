@@ -1,49 +1,78 @@
 @extends('admin.layout')
 
 @section('title', 'Kelola Galeri')
+@section('crumb', 'Admin / Kelola Galeri')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3 mb-0">Kelola Galeri</h1>
-        <a href="{{ route('admin.galleries.create') }}"
-           class="btn btn-dark">+ Tambah Foto</a>
+    <div class="page-head">
+        <div>
+            <h2 class="serif">Kelola Galeri</h2>
+            <p>Foto yang aktif akan tampil di halaman Galeri website.</p>
+        </div>
+
+        <a class="btn btn-wine" href="{{ route('admin.galleries.create') }}">
+            <x-admin.icon name="plus" />Tambah Foto
+        </a>
     </div>
 
-    <div class="row g-3">
-        @forelse ($galleries as $gallery)
-            <div class="col-6 col-md-4 col-lg-3">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('storage/'.$gallery->image) }}"
-                         class="card-img-top" alt="{{ $gallery->title }}"
-                         style="height:180px;object-fit:cover">
+    {{-- Tab filter --}}
+    <div class="tabs">
+        <a href="{{ route('admin.galleries.index') }}" class="{{ ! $status ? 'on' : '' }}">
+            Semua ({{ $counts['semua'] }})
+        </a>
+        <a href="{{ route('admin.galleries.index', ['status' => 'aktif']) }}" class="{{ $status === 'aktif' ? 'on' : '' }}">
+            Aktif ({{ $counts['aktif'] }})
+        </a>
+        <a href="{{ route('admin.galleries.index', ['status' => 'nonaktif']) }}" class="{{ $status === 'nonaktif' ? 'on' : '' }}">
+            Nonaktif ({{ $counts['nonaktif'] }})
+        </a>
+    </div>
 
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $gallery->title }}</h5>
-                        <p class="small text-muted">
+    @if ($galleries->isEmpty())
+        <div class="card empty">
+            @if ($status)
+                Tidak ada foto pada filter ini.
+            @else
+                Belum ada foto galeri. Tambahkan foto pertama.
+            @endif
+        </div>
+    @else
+        <div class="ggrid">
+            @foreach ($galleries as $gallery)
+                <div class="card g">
+                    <div class="im">
+                        <img src="{{ asset('storage/'.$gallery->image) }}" alt="{{ $gallery->title }}" loading="lazy">
+                        <span class="pill badge {{ $gallery->is_active ? 'on' : 'off' }}">
                             {{ $gallery->is_active ? 'Aktif' : 'Nonaktif' }}
-                        </p>
+                        </span>
+                    </div>
 
-                        <a href="{{ route('admin.galleries.edit', $gallery) }}"
-                           class="btn btn-warning btn-sm">Edit</a>
+                    <div class="gb">
+                        <b>{{ $gallery->title }}</b>
+                        <small>Urutan {{ $gallery->sort_order }}</small>
 
-                        <form class="d-inline" method="POST"
-                              action="{{ route('admin.galleries.destroy', $gallery) }}"
-                              onsubmit="return confirm('Hapus foto ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
+                        <div class="ga">
+                            <a class="btn btn-line sm" href="{{ route('admin.galleries.edit', $gallery) }}">
+                                <x-admin.icon name="edit" />Edit
+                            </a>
+
+                            <form method="POST" action="{{ route('admin.galleries.destroy', $gallery) }}"
+                                  onsubmit="return confirm('Hapus foto ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="iconbtn del" type="submit"
+                                        aria-label="Hapus {{ $gallery->title }}" title="Hapus">
+                                    <x-admin.icon name="trash" />
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="col-12">
-                <div class="alert alert-info">
-                    Belum ada foto galeri. Tambahkan foto pertama.
-                </div>
-            </div>
-        @endforelse
-    </div>
+            @endforeach
+        </div>
 
-    <div class="mt-4">{{ $galleries->links() }}</div>
+        <div class="pager-wrap">
+            {{ $galleries->links('vendor.pagination.admin') }}
+        </div>
+    @endif
 @endsection
