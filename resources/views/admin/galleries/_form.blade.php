@@ -9,11 +9,21 @@
         <h3 class="serif">Informasi foto</h3>
 
         <div class="f">
-            <label for="title">Judul foto <i>*</i></label>
+            <label for="title">Nama pasangan <i>*</i></label>
             <input type="text" id="title" name="title"
                    value="{{ old('title', $gallery->title) }}"
+                   placeholder="Contoh: Mawar & Zaki"
                    class="@error('title') invalid @enderror" required>
             @error('title') <div class="msg">{{ $message }}</div> @enderror
+        </div>
+
+        <div class="f">
+            <label for="venue">Tempat pernikahan</label>
+            <input type="text" id="venue" name="venue"
+                   value="{{ old('venue', $gallery->venue) }}"
+                   placeholder="Contoh: Graha Sativa"
+                   class="@error('venue') invalid @enderror">
+            @error('venue') <div class="msg">{{ $message }}</div> @enderror
         </div>
 
         <div class="f">

@@ -140,26 +140,44 @@
 }
 
 .galeri-card figcaption {
-    min-height: 5.4rem;
-    padding: 1rem 1.4rem 1.1rem;
+    min-height: 7rem;
+    padding: 1.2rem 1.4rem 1.4rem;
 }
 
 .galeri-card figcaption b {
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 2;
-    line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 1.9rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
     line-height: 1.2;
+    letter-spacing: .04em;
+    text-transform: uppercase;
 }
 
-.galeri-card figcaption small {
-    display: block;
-    margin-top: .2rem;
-    color: #7a746a;
+.galeri-card .venue {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    margin-top: .6rem;
+    color: #6b655b;
     font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.galeri-card .pin {
+    flex-shrink: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: none;
+    stroke: var(--galeri-wine);
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .galeri-empty {
@@ -332,8 +350,15 @@ body.lightbox-open {
         font-size: 16px;
     }
 
-    .galeri-card figcaption small {
+    .galeri-card .venue {
+        gap: 5px;
+        margin-top: 4px;
         font-size: 13px;
+    }
+
+    .galeri-card .pin {
+        width: 16px;
+        height: 16px;
     }
 
     .galeri-empty {

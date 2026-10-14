@@ -49,8 +49,7 @@
 
                     <div class="gb">
                         <b>{{ $gallery->title }}</b>
-                        <small>{{ $gallery->taken_at ? $gallery->taken_at->locale('id')->translatedFormat('F Y') : 'Tanpa tanggal' }} · Urutan {{ $gallery->sort_order }}</small>
-
+                        <small>{{ $gallery->venue ?: 'Tempat belum diisi' }} · {{ $gallery->taken_at ? $gallery->taken_at->locale('id')->translatedFormat('F Y') : 'Tanpa tanggal' }}</small>
                         <div class="ga">
                             <a class="btn btn-line sm" href="{{ route('admin.galleries.edit', $gallery) }}">
                                 <x-admin.icon name="edit" />Edit

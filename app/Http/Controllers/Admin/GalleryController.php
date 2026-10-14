@@ -48,6 +48,7 @@ class GalleryController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
+            'venue' => ['nullable', 'string', 'max:150'],
             'description' => ['nullable', 'string', 'max:2000'],
             'taken_at' => ['required', 'date'],
             'image' => [
@@ -82,6 +83,7 @@ class GalleryController extends Controller
     {
         $data = $request->validate([
             'title' => ['required', 'string', 'max:150'],
+            'venue' => ['nullable', 'string', 'max:150'],
             'description' => ['nullable', 'string', 'max:2000'],
             'taken_at' => ['required', 'date'],
             'image' => [

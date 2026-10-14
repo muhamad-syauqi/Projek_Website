@@ -57,7 +57,7 @@
                     <figure class="galeri-card">
                         <button type="button" class="galeri-photo"
                                 data-full="{{ asset('storage/'.$gallery->image) }}"
-                                data-caption="{{ $gallery->title }}"
+                                data-caption="{{ $gallery->title }}{{ $gallery->venue ? ' - '.$gallery->venue : '' }}"
                                 aria-label="Perbesar foto {{ $gallery->title }}">
                             <img src="{{ asset('storage/'.$gallery->image) }}"
                                  alt="{{ $gallery->title }}" loading="lazy">
@@ -65,8 +65,15 @@
 
                         <figcaption>
                             <b>{{ $gallery->title }}</b>
-                            @if ($gallery->taken_at)
-                                <small>{{ $gallery->taken_at->locale('id')->translatedFormat('F Y') }}</small>
+
+                            @if ($gallery->venue)
+                                <small class="venue">
+                                    <svg class="pin" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/>
+                                        <circle cx="12" cy="9.5" r="2.5"/>
+                                    </svg>
+                                    <span>{{ $gallery->venue }}</span>
+                                </small>
                             @endif
                         </figcaption>
                     </figure>
