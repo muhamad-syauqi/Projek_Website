@@ -16,4 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
 });
+
+// Header bersama: mengecil sedikit dan diberi bayangan saat halaman di-scroll
+(function () {
+    var header = document.querySelector('.paket-header');
+    if (!header) return;
+
+    var ticking = false;
+
+    function update() {
+        header.classList.toggle('is-scrolled', window.scrollY > 24);
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            window.requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    update();
+})();

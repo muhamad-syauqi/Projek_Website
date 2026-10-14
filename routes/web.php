@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\GalleryPageController;
+use App\Http\Controllers\WeddingCalculatorController;
 use App\Models\Gallery;
 use App\Models\Package;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,13 @@ Route::get('/paket/{slug}', function (string $slug) {
 })->name('paket.detail');
 
 Route::get('/galeri', [GalleryPageController::class, 'index'])->name('galeri');
+
+Route::get('/wedding-calculator', [WeddingCalculatorController::class, 'index'])
+    ->name('kalkulator');
+
+Route::post('/wedding-calculator/pdf', [WeddingCalculatorController::class, 'pdf'])
+    ->middleware('throttle:20,1')
+    ->name('kalkulator.pdf');
 
 // Login admin
 Route::prefix('admin')->name('admin.')->group(function () {
