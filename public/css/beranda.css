@@ -149,7 +149,7 @@
     grid-template-columns: minmax(0, 1fr) 30.56rem;
     gap: 4.17rem;
     align-items: center;
-    padding: 0.69rem 7.5rem 10.42rem;
+    padding: 6.5rem 7.5rem 10.42rem;
 }
 
 .hm-hero-t h1 {
@@ -788,7 +788,7 @@
     .hm-hero-c {
         grid-template-columns: 1fr;
         gap: 36px;
-        padding: 10px 5% 90px;
+        padding: 40px 5% 90px;
     }
 
     .hm-hero-t h1 {

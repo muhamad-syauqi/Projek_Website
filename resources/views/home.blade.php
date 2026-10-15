@@ -43,30 +43,15 @@
           rel="stylesheet">
 </head>
 
-<body class="hm-page">
+
+    <body class="hm-page">
+    @include('partials.header')
+
     <main>
 
         {{-- HERO --}}
-        <section class="hm-hero" id="beranda">
-            <header class="site-header">
-                <a class="brand brand-header" href="{{ route('home') }}"
-                   aria-label="Fahira Wedding beranda">
-                    <img src="{{ asset('images/logo-fahira.png') }}" alt="Fahira Wedding">
-                </a>
-
-                <button class="menu-toggle" type="button"
-                        aria-label="Buka menu" aria-expanded="false">☰</button>
-
-                <nav class="navigation" aria-label="Navigasi utama">
-                    <a class="active" href="{{ route('home') }}">Beranda</a>
-                    <a href="{{ route('paket') }}">Paket</a>
-                    <a href="{{ route('kalkulator.intro') }}">Wedding Calculator</a>
-                    <a href="{{ route('tentang') }}">Tentang</a>
-                    <a href="{{ url('/galeri') }}">Galeri</a>
-                    <a href="#konsultasi">Konsultasi</a>
-                </nav>
-            </header>
-
+        <section class="hm-hero">
+           
             <div class="hm-hero-c">
                 <div class="hm-hero-t">
                     <div class="hm-eyebrow">Wedding Organizer · Fahira Wedding</div>

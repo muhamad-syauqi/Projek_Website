@@ -1,9 +1,10 @@
-{{-- HEADER (dipakai di semua halaman kecuali home) --}}
 @php
-    // Ganti dengan nomor WhatsApp bisnis, pakai kode negara tanpa tanda +
-    $waNumber = '6281234567890';
+    // Nomor WhatsApp diambil dari config/kalkulator.php (env KALKULATOR_WHATSAPP)
+    $waNumber = config('kalkulator.whatsapp');
     $waText = 'Halo Fahira Wedding, saya ingin konsultasi mengenai paket pernikahan.';
 @endphp
+
+<link rel="stylesheet" href="{{ asset('css/header.css') }}?v={{ filemtime(public_path('css/header.css')) }}">
 
 <header class="site-header paket-header" id="beranda">
     <a class="brand brand-header" href="{{ route('home') }}" aria-label="Fahira Wedding beranda">
@@ -14,15 +15,16 @@
         aria-label="Buka menu" aria-expanded="false">☰</button>
 
     <nav class="navigation" aria-label="Navigasi utama">
-        <a href="{{ route('home') }}">Beranda</a>
+        <a class="{{ request()->routeIs('home') ? 'active' : '' }}"
+           href="{{ route('home') }}">Beranda</a>
         <a class="{{ request()->routeIs('paket', 'paket.detail') ? 'active' : '' }}"
            href="{{ route('paket') }}">Paket</a>
-        <a class="{{ request()->is('wedding-calculator*') ? 'active' : '' }}"
-           href="{{ url('/wedding-calculator') }}">Wedding Calculator</a>
+        <a class="{{ request()->routeIs('kalkulator.*') ? 'active' : '' }}"
+           href="{{ route('kalkulator.intro') }}">Wedding Calculator</a>
         <a class="{{ request()->routeIs('tentang') ? 'active' : '' }}"
            href="{{ route('tentang') }}">Tentang</a>
-        <a class="{{ request()->is('galeri') ? 'active' : '' }}"
-           href="{{ url('/galeri') }}">Galeri</a>
+        <a class="{{ request()->routeIs('galeri') ? 'active' : '' }}"
+           href="{{ route('galeri') }}">Galeri</a>
         <a class="nav-cta"
            href="https://wa.me/{{ $waNumber }}?text={{ rawurlencode($waText) }}"
            target="_blank" rel="noopener noreferrer">
@@ -34,172 +36,4 @@
     </nav>
 </header>
 
-<style>
-    /* =====================================
-       HEADER BERSAMA (semua halaman kecuali home)
-       Bar tipis, menempel di atas saat scroll
-       ===================================== */
-
-    html:has(.paket-header) {
-        scroll-padding-top: 84px;
-    }
-
-    .site-header.paket-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        height: 80px;
-        min-height: 0;
-        padding: 0 clamp(16px, 5vw, 72px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: rgba(57, 55, 45, .97);
-        border-bottom: 1px solid rgba(178, 155, 69, .5);
-        transition: height .25s ease, background .25s ease, box-shadow .25s ease;
-    }
-
-    .site-header.paket-header.is-scrolled {
-        height: 66px;
-        background: rgba(43, 41, 34, .98);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
-    }
-
-    /* Logo tetap besar dan jelas, hanya mengecil sedikit saat scroll */
-    .paket-header .brand-header {
-        width: auto;
-        min-height: 0;
-    }
-
-    /* File logo berbentuk persegi dengan ruang transparan di sekelilingnya,
-       jadi kotaknya dibuat lebih besar dari bar agar gambar logo tampil jelas */
-    .paket-header .brand-header img {
-        width: auto;
-        max-width: none;
-        height: 118px;
-        margin: -20px 0;
-        object-fit: contain;
-        filter: drop-shadow(0 1px 4px rgba(0, 0, 0, .6));
-        transition: height .25s ease;
-    }
-
-    .paket-header.is-scrolled .brand-header img {
-        height: 98px;
-    }
-
-    .paket-header .navigation {
-        gap: 4px;
-        font-size: 15px;
-        font-weight: 500;
-    }
-
-    .paket-header .navigation a {
-        padding: 8px 14px;
-    }
-
-    /* Tombol Konsultasi (ke WhatsApp), tampil beda dari menu lain */
-    .paket-header .navigation a.nav-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin-left: 12px;
-        padding: 9px 20px;
-        border: 1px solid #e9d36f;
-        border-radius: 999px;
-        background: linear-gradient(100deg, #6e0a1f, #c31538);
-        box-shadow: 0 3px 10px rgba(195, 21, 56, .35);
-        color: #fff;
-        font-weight: 600;
-        transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
-    }
-
-    .paket-header .navigation a.nav-cta svg {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
-    }
-
-    .paket-header .navigation a.nav-cta:hover {
-        background: linear-gradient(100deg, #6e0a1f, #c31538);
-        color: #fff;
-        filter: brightness(1.15);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 14px rgba(195, 21, 56, .45);
-    }
-
-    @media (max-width: 1000px) {
-        .paket-header .navigation {
-            gap: 0;
-            font-size: 14px;
-        }
-
-        .paket-header .navigation a {
-            padding: 8px 10px;
-        }
-    }
-
-    @media (max-width: 820px) {
-        html:has(.paket-header) {
-            scroll-padding-top: 72px;
-        }
-
-        .site-header.paket-header {
-            height: 66px;
-            padding: 0 16px;
-        }
-
-        .site-header.paket-header.is-scrolled {
-            height: 58px;
-        }
-
-        .paket-header .brand-header img {
-            height: 92px;
-            margin: -14px 0;
-        }
-
-        .paket-header.is-scrolled .brand-header img {
-            height: 80px;
-        }
-
-        .paket-header .navigation {
-            top: calc(100% + 8px);
-            left: 12px;
-            right: 12px;
-            gap: 4px;
-            font-size: 15px;
-        }
-
-        .paket-header .navigation a {
-            padding: 10px 12px;
-        }
-
-        .paket-header .navigation a.nav-cta {
-            justify-content: center;
-            margin: 6px 0 0;
-            padding: 12px;
-        }
-    }
-</style>
-
-<script>
-    (function () {
-        var header = document.querySelector('.paket-header');
-        if (!header) return;
-
-        var ticking = false;
-
-        function update() {
-            header.classList.toggle('is-scrolled', window.scrollY > 24);
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', function () {
-            if (!ticking) {
-                window.requestAnimationFrame(update);
-                ticking = true;
-            }
-        }, { passive: true });
-
-        update();
-    })();
-</script>
+<script src="{{ asset('js/header.js') }}?v={{ filemtime(public_path('js/header.js')) }}" defer></script>
