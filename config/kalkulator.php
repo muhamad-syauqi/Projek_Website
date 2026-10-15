@@ -14,21 +14,21 @@ return [
     ],
 
     'concepts' => [
-        'adat-sunda' => 'Adat Sunda',
-        'modern' => 'Modern',
-        'rustic' => 'Rustic',
-        'islami' => 'Islami',
-        'lainnya' => 'Lainnya',
+        'adat-sunda' => ['label' => 'Adat Sunda', 'desc' => 'Tradisi & sakral', 'icon' => 'fa-solid fa-gem'],
+        'modern' => ['label' => 'Modern', 'desc' => 'Minimalis elegan', 'icon' => 'fa-solid fa-cube'],
+        'rustic' => ['label' => 'Rustic', 'desc' => 'Hangat & natural', 'icon' => 'fa-solid fa-tree'],
+        'islami' => ['label' => 'Islami', 'desc' => "Khidmat & syar'i", 'icon' => 'fa-solid fa-moon'],
+        'lainnya' => ['label' => 'Lainnya', 'desc' => 'Konsep sendiri', 'icon' => 'fa-solid fa-plus'],
     ],
 
     'venues' => [
-        'rumah' => 'Di rumah',
-        'gedung' => 'Di gedung',
+        'rumah' => ['label' => 'Di rumah', 'desc' => 'Tenda dan dekorasi di kediaman', 'icon' => 'fa-solid fa-house'],
+        'gedung' => ['label' => 'Di gedung', 'desc' => 'Aula atau ballroom', 'icon' => 'fa-solid fa-building'],
     ],
 
     'durations' => [
-        'satu-hari' => '1 hari',
-        'dua-hari' => '2 hari',
+        'satu-hari' => ['label' => '1 hari', 'desc' => 'Akad dan resepsi di hari yang sama', 'icon' => 'fa-solid fa-sun'],
+        'dua-hari' => ['label' => '2 hari', 'desc' => 'Akad dan resepsi di hari terpisah', 'icon' => 'fa-solid fa-calendar-days'],
     ],
 
     'services' => [
@@ -50,7 +50,7 @@ return [
         ],
         'catering' => [
             'label' => 'Catering',
-            'desc' => 'Menu prasmanan, dihitung per tamu',
+            'desc' => 'Prasmanan, dihitung per tamu',
             'icon' => 'fa-solid fa-utensils',
             'default' => 'standar',
             'per_guest' => true,
@@ -83,12 +83,12 @@ return [
     ],
 
     'addons' => [
-        'photobooth' => ['label' => 'Galeri photo booth', 'price' => 1500000, 'default' => true],
-        'minigarden' => ['label' => 'Mini garden', 'price' => 2000000, 'default' => false],
-        'henna' => ['label' => 'Henna & nail art', 'price' => 750000, 'default' => true],
-        'cinematic' => ['label' => 'Video cinematic 4-5 menit', 'price' => 3000000, 'default' => false],
-        'pager' => ['label' => 'Pager ayu & pager bagus', 'price' => 1200000, 'default' => false],
-        'softlens' => ['label' => 'Soft lens', 'price' => 500000, 'default' => false],
+        'photobooth' => ['label' => 'Galeri photo booth', 'icon' => 'fa-solid fa-camera-retro', 'price' => 1500000, 'default' => true],
+        'minigarden' => ['label' => 'Mini garden', 'icon' => 'fa-solid fa-seedling', 'price' => 2000000, 'default' => false],
+        'henna' => ['label' => 'Henna & nail art', 'icon' => 'fa-solid fa-hand-sparkles', 'price' => 750000, 'default' => true],
+        'cinematic' => ['label' => 'Video cinematic 4-5 menit', 'icon' => 'fa-solid fa-film', 'price' => 3000000, 'default' => false],
+        'pager' => ['label' => 'Pager ayu & pager bagus', 'icon' => 'fa-solid fa-user-group', 'price' => 1200000, 'default' => false],
+        'softlens' => ['label' => 'Soft lens', 'icon' => 'fa-solid fa-eye', 'price' => 500000, 'default' => false],
     ],
 
 ];

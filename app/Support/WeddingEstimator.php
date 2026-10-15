@@ -4,6 +4,30 @@ namespace App\Support;
 
 class WeddingEstimator
 {
+    /** Pilihan awal saat pengguna pertama kali membuka calculator. */
+    public function defaults(): array
+    {
+        $config = config('kalkulator');
+
+        return [
+            'guests' => 300,
+            'concept' => array_key_first($config['concepts']),
+            'venue' => array_key_first($config['venues']),
+            'duration' => array_key_first($config['durations']),
+            'tier' => collect($config['services'])
+                ->map(fn ($service) => $service['default'])
+                ->all(),
+            'addons' => collect($config['addons'])
+                ->filter(fn ($addon) => $addon['default'])
+                ->keys()
+                ->all(),
+        ];
+    }
+
+    /**
+     * Hitung estimasi dari pilihan pengguna. Harga SELALU diambil dari
+     * config, bukan dari nilai yang dikirim browser.
+     */
     public function calculate(array $input): array
     {
         $config = config('kalkulator');
@@ -47,9 +71,9 @@ class WeddingEstimator
 
         return [
             'guests' => $guests,
-            'concept' => $config['concepts'][$input['concept']] ?? '-',
-            'venue' => $config['venues'][$input['venue']] ?? '-',
-            'duration' => $config['durations'][$input['duration']] ?? '-',
+            'concept' => $config['concepts'][$input['concept']]['label'] ?? '-',
+            'venue' => $config['venues'][$input['venue']]['label'] ?? '-',
+            'duration' => $config['durations'][$input['duration']]['label'] ?? '-',
             'lines' => $lines,
             'subtotal' => $subtotal,
             'addons' => $addons,
@@ -62,20 +86,23 @@ class WeddingEstimator
     public function catalog(): array
     {
         $config = config('kalkulator');
+        $labels = fn (array $items) => collect($items)
+            ->map(fn ($item) => $item['label'])
+            ->all();
 
         return [
-            'whatsapp' => $config['whatsapp'],
             'min_guests' => $config['min_guests'],
             'max_guests' => $config['max_guests'],
             'tiers' => $config['tiers'],
+            'concepts' => $labels($config['concepts']),
+            'venues' => $labels($config['venues']),
+            'durations' => $labels($config['durations']),
             'services' => collect($config['services'])->map(fn ($service) => [
-                'label' => $service['label'],
                 'default' => $service['default'],
                 'per_guest' => $service['per_guest'],
                 'prices' => $service['prices'],
             ])->all(),
             'addons' => collect($config['addons'])->map(fn ($addon) => [
-                'label' => $addon['label'],
                 'price' => $addon['price'],
             ])->all(),
         ];

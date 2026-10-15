@@ -17,7 +17,7 @@
         <a href="{{ route('home') }}">Beranda</a>
         <a class="{{ request()->routeIs('paket', 'paket.detail') ? 'active' : '' }}"
            href="{{ route('paket') }}">Paket</a>
-        <a class="{{ request()->is('wedding-calculator') ? 'active' : '' }}"
+        <a class="{{ request()->is('wedding-calculator*') ? 'active' : '' }}"
            href="{{ url('/wedding-calculator') }}">Wedding Calculator</a>
         <a class="{{ request()->routeIs('tentang') ? 'active' : '' }}"
            href="{{ route('tentang') }}">Tentang</a>

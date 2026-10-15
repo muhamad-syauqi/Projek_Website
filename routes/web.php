@@ -44,12 +44,27 @@ Route::get('/paket/{slug}', function (string $slug) {
 
 Route::get('/galeri', [GalleryPageController::class, 'index'])->name('galeri');
 
-Route::get('/wedding-calculator', [WeddingCalculatorController::class, 'index'])
-    ->name('kalkulator');
+// Wedding Calculator (bertahap)
+Route::prefix('wedding-calculator')
+    ->name('kalkulator.')
+    ->controller(WeddingCalculatorController::class)
+    ->group(function () {
+        Route::get('/', 'intro')->name('intro');
 
-Route::post('/wedding-calculator/pdf', [WeddingCalculatorController::class, 'pdf'])
-    ->middleware('throttle:20,1')
-    ->name('kalkulator.pdf');
+        Route::get('/langkah/{step}', 'step')
+            ->whereIn('step', [1, 2, 3])
+            ->name('langkah');
+
+        Route::post('/langkah/{step}', 'save')
+            ->whereIn('step', [1, 2, 3])
+            ->name('simpan');
+
+        Route::get('/hasil', 'result')->name('hasil');
+
+        Route::get('/hasil/pdf', 'pdf')
+            ->middleware('throttle:20,1')
+            ->name('pdf');
+    });
 
 // Login admin
 Route::prefix('admin')->name('admin.')->group(function () {
