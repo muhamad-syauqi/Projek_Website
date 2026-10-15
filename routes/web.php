@@ -1,6 +1,7 @@
 
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -12,7 +13,7 @@ use App\Models\Package;
 use Illuminate\Support\Facades\Route;
 
 // Halaman publik
-Route::view('/', 'home')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::view('/tentang', 'tentang')->name('tentang');
 
