@@ -1,4 +1,5 @@
-{{-- FOOTER (dipakai di home dan paket) --}}
+{{-- FOOTER (dipakai di semua halaman publik) --}}
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}?v={{ filemtime(public_path('css/footer.css')) }}">
 <footer class="footer">
     <div class="footer-main">
         <div class="footer-brand">
@@ -27,14 +28,14 @@
 
         <div class="footer-column social-column">
             <h3>Sosial Media</h3>
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
-            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i><span>Twitter</span></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+            <a href="https://www.facebook.com/share/19wwmKsXe9/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i><span>Facebook</span></a>
+            <a href="https://maps.app.goo.gl/7vWY2TrRpU4AE29V8" target="_blank" rel="noopener noreferrer" aria-label="Maps"><i class="fa-solid fa-location-dot"></i><span>Maps</span></a>
+            <a href="https://www.instagram.com/fahiraweddingsalon_?utm_source=ig_web_button_share_sheet&srtk=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <small class="copyright">Copyright © {{ date('Y') }}</small>
+        <small class="copyright">Copyright © {{ date('Y') }} Fahira Wedding</small>
         <div class="footer-legal">
             <a href="#">Terms &amp; Conditions</a>
             <a href="#">Privacy Policy</a>

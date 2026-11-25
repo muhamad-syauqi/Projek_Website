@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang Fahira Wedding</title>
+    @include('partials.favicon')
     <meta name="description" content="Fahira Wedding berkomitmen memberikan pelayanan terbaik dalam membantu mewujudkan momen pernikahan yang berkesan bagi setiap pasangan.">
 
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">

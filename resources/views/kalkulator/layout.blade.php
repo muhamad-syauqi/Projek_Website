@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@yield('title', 'Wedding Calculator') - Fahira Wedding</title>
+    @include('partials.favicon')
     <meta name="description"
           content="Hitung estimasi biaya pernikahan Anda bersama Fahira Wedding.">
 

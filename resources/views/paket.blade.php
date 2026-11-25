@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Wedding Package - Fahira Wedding</title>
+    @include('partials.favicon')
     <meta name="description"
           content="Pilih paket pernikahan Fahira Wedding sesuai kebutuhan Anda.">
 
@@ -101,7 +102,7 @@
                         {{-- FASILITAS --}}
                         <div class="paket-tags">
 
-                            @forelse (($package->facilities ?? []) as $facility)
+                            @forelse (array_slice($package->facilities ?? [], 0, 3) as $facility)
                                 <span>
                                     {{ $facility }}
                                     <b>✓</b>
@@ -128,7 +129,7 @@
                         <div class="paket-actions">
 
                             <a class="paket-btn paket-btn-primary"
-                               href="https://wa.me/6281234567890?text={{ rawurlencode('Halo Fahira Wedding, saya ingin konsultasi mengenai ' . $package->name . '.') }}"
+                               href="https://wa.me/62895343552652?text={{ rawurlencode('Halo Fahira Wedding, saya ingin konsultasi mengenai ' . $package->name . '.') }}"
                                target="_blank"
                                rel="noopener noreferrer">
                                 Pilih Paket

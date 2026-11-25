@@ -52,7 +52,7 @@
 
             <div class="kw-arch">
                 <div class="kw-a1">
-                    <img src="{{ asset('images/paket-pernikahan.jpg') }}" alt="Pasangan pengantin">
+                    <img src="{{ asset('images/foto-pengantin-1.jpg') }}" alt="Pasangan pengantin">
                 </div>
                 <div class="kw-fl">
                     <small>Contoh total estimasi</small>

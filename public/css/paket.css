@@ -117,7 +117,7 @@
     row-gap: 6rem;
     max-width: 82rem;
     margin: 0 auto;
-    align-items: start;
+    align-items: stretch;
 }
 
 .paket-card {
@@ -153,7 +153,7 @@
 }
 
 .paket-card-content {
-    flex: 1;                      
+    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 1.1rem 1.4rem 1.6rem;
@@ -167,7 +167,7 @@
     align-items: center;
     justify-content: center;
     gap: .5rem .7rem;
-    min-height: 9.6rem;
+    min-height: 7.6rem;
     margin-bottom: 1rem;
 }
 
@@ -200,6 +200,7 @@
 
 /* Deskripsi dan harga */
 .paket-description {
+    flex: 1 1 auto;
     min-height: 4.6rem;
     margin: .6rem 0 .6rem;
     color: #5b5752;
@@ -470,7 +471,7 @@
         scroll-behavior: auto;
         transition: none;
     }
-
+}
 
 /* =====================================
    HEADER BERSAMA (semua halaman kecuali home)
@@ -579,5 +580,4 @@ html:has(.paket-header) {
     .paket-header .navigation a {
         padding: 10px 12px;
     }
-}
 }

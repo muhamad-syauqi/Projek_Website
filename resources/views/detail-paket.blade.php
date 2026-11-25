@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Detail {{ $package->name }} - Fahira Wedding</title>
+    @include('partials.favicon')
 
     <meta name="description"
           content="Detail fasilitas dan harga {{ $package->name }} dari Fahira Wedding.">
@@ -126,7 +127,7 @@
         </article>
     </main>
 
-    @include('partials.footer')
+
 
     <script src="{{ asset('js/home.js') }}"></script>
     <script src="{{ asset('js/detail-paket.js') }}"></script>

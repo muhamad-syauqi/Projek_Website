@@ -31,7 +31,7 @@ Route::get('/paket/{slug}', function (string $slug) {
         ->where('is_active', true)
         ->firstOrFail();
 
-    $waUrl = 'https://wa.me/6281234567890?text='
+    $waUrl = 'https://wa.me/62895343552652?text='
         . rawurlencode(
             'Halo Fahira Wedding, saya ingin konsultasi mengenai '
             . $package->name . '.'

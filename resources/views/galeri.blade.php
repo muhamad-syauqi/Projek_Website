@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeri - Fahira Wedding</title>
+    @include('partials.favicon')
     <meta name="description" content="Kumpulan momen berharga bersama klien Fahira Wedding.">
 
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
