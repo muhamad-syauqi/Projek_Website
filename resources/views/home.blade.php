@@ -177,7 +177,7 @@
                                 <div class="hm-pr">{{ Estimator::rupiah($package->price) }}</div>
 
                                 <div class="hm-chips">
-                                    @foreach (array_slice($package->facilities ?? [], 0, 4) as $facility)
+                                    @foreach (array_slice($package->facility_list, 0, 4) as $facility)
                                         <span>{{ $facility }} <b>✓</b></span>
                                     @endforeach
                                 </div>

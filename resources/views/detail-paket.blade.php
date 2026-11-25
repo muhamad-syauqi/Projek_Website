@@ -1,3 +1,11 @@
+@php
+    $groups = $package->facility_groups;
+    $labels = \App\Models\Package::FACILITY_GROUPS;
+
+    // Bila hanya salah satu dari Dekorasi / Rias & Busana yang terisi, kartunya dibuat selebar penuh
+    $halfCount = count(array_intersect_key($groups, ['dekorasi' => 1, 'rias' => 1]));
+    $priceText = 'Rp. ' . number_format($package->price, 0, ',', '.');
+@endphp
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,7 +20,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/paket.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detail-paket.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detail-paket.css') }}?v={{ filemtime(public_path('css/detail-paket.css')) }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +28,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
           rel="stylesheet">
 </head>
 
@@ -29,108 +37,76 @@
     @include('partials.header')
 
     <main class="detail-wrap">
-        <article class="detail-card">
 
-            {{-- FOTO UTAMA --}}
+        {{-- FOTO + INFORMASI PAKET --}}
+        <section class="detail-top">
+
             <div class="detail-photo">
-
                 @if ($package->image)
-                    <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url($package->image) }}"
-                        alt="{{ $package->name }}">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($package->image) }}"
+                         alt="{{ $package->name }}">
                 @else
-                    <img
-                        src="{{ asset('images/paket/hero-paket.jpg') }}"
-                        alt="{{ $package->name }}">
+                    <img src="{{ asset('images/paket/hero-paket.jpg') }}"
+                         alt="{{ $package->name }}">
                 @endif
-
-                <a class="detail-close"
-                   href="{{ route('paket') }}"
-                   aria-label="Kembali ke daftar paket">
-
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M5 5l14 14M19 5L5 19"/>
-                    </svg>
-
-                </a>
             </div>
 
-            {{-- INFORMASI PAKET --}}
-            <div class="detail-body">
-
-                <h1>{{ $package->name }}</h1>
-
-                <p class="detail-price">
-                    Rp {{ number_format($package->price, 0, ',', '.') }}
-                </p>
-
-                <p class="detail-desc">
-                    {{ $package->description }}
-                </p>
-
-                <hr class="detail-rule">
-
-                {{-- FASILITAS --}}
-                <h2>Fasilitas Paket</h2>
-
-                <div class="detail-facilities">
-                    <div class="detail-col">
-
-                        <span class="detail-bookmark"
-                              aria-hidden="true"></span>
-
-                        <ul>
-                            @forelse (($package->facilities ?? []) as $facility)
-                                <li>{{ $facility }}</li>
-                            @empty
-                                <li>
-                                    Fasilitas dapat dikonsultasikan
-                                    langsung bersama tim kami.
-                                </li>
-                            @endforelse
-                        </ul>
-
-                    </div>
-                </div>
-
-                <hr class="detail-rule detail-rule-bottom">
-
-                {{-- HARGA DAN KONSULTASI --}}
-                <div class="detail-estimate">
-
-                    <h2>Estimasi Harga</h2>
-
-                    <p class="detail-price">
-                        Rp {{ number_format($package->price, 0, ',', '.') }}
-                    </p>
-
-                    <a class="detail-wa"
-                       href="{{ $waUrl }}"
-                       target="_blank"
-                       rel="noopener noreferrer">
-
-                        <i class="fa-brands fa-whatsapp"
-                           aria-hidden="true"></i>
-
-                        Konsultasi
-
-                    </a>
-
-                    <p class="detail-note">
-                        *Harga dapat berubah sesuai kebutuhan dan lokasi.
-                    </p>
-
-                </div>
-
+            <div class="detail-info">
+                <h1>Detail {{ $package->name }}</h1>
+                <p class="detail-price">{{ $priceText }}</p>
+                <p class="detail-desc">{{ $package->description }}</p>
             </div>
 
-        </article>
+        </section>
+
+        <hr class="detail-rule">
+
+        {{-- FASILITAS PAKET --}}
+        <section class="facility-section">
+            <h2 class="facility-heading">Fasilitas Paket</h2>
+
+            @if (count($groups) > 0)
+                <div class="facility-grid">
+                    @foreach ($groups as $key => $items)
+                        <article class="facility-card facility-{{ $key }}{{ in_array($key, ['dekorasi', 'rias'], true) && $halfCount === 1 ? ' is-wide' : '' }}">
+                            <h3>{{ $labels[$key] }}</h3>
+
+                            <ul>
+                                @foreach ($items as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <p class="facility-empty">
+                    Fasilitas dapat dikonsultasikan langsung bersama tim kami.
+                </p>
+            @endif
+        </section>
+
+        <hr class="detail-rule detail-rule-bottom">
+
+        {{-- ESTIMASI HARGA + KONSULTASI --}}
+        <section class="detail-estimate">
+            <div>
+                <h2>Estimasi Harga</h2>
+                <p class="detail-price">{{ $priceText }}</p>
+            </div>
+
+            <a class="detail-wa"
+               href="{{ $waUrl }}"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <span>Konsultasi</span>
+            </a>
+        </section>
+
     </main>
 
-
-
     <script src="{{ asset('js/home.js') }}"></script>
-    <script src="{{ asset('js/detail-paket.js') }}"></script>
 
 </body>
 </html>

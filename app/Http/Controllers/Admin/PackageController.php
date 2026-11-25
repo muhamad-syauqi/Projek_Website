@@ -54,11 +54,8 @@ class PackageController extends Controller
         $data = $this->validatePackage($request);
 
         $data['slug'] = $this->makeUniqueSlug($data['name']);
-        $data['facilities'] = $this->parseFacilities(
-            $data['facilities_text'] ?? ''
-        );
-
-        unset($data['facilities_text']);
+        $facilities = $this->extractFacilities($data);
+        $data['facilities'] = $facilities;
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')
@@ -80,17 +77,12 @@ class PackageController extends Controller
     public function update(Request $request, Package $package)
     {
         $data = $this->validatePackage($request);
+        
+        $data['slug'] = $this->makeUniqueSlug($data['name']);
 
-        $data['slug'] = $this->makeUniqueSlug(
-            $data['name'],
-            $package->id
-        );
-
-        $data['facilities'] = $this->parseFacilities(
-            $data['facilities_text'] ?? ''
-        );
-
-        unset($data['facilities_text']);
+        $facilities = $this->extractFacilities($data);
+        
+        $data['facilities'] = $facilities;
 
         if ($request->hasFile('image')) {
             if ($package->image) {
@@ -134,7 +126,10 @@ class PackageController extends Controller
             ],
             'price' => ['required', 'integer', 'min:0'],
             'description' => ['required', 'string', 'max:5000'],
-            'facilities_text' => ['nullable', 'string', 'max:10000'],
+            'facilities_dekorasi' => ['nullable', 'string', 'max:5000'],
+            'facilities_rias' => ['nullable', 'string', 'max:5000'],
+            'facilities_dokumentasi' => ['nullable', 'string', 'max:5000'],
+            'facilities_lainnya' => ['nullable', 'string', 'max:5000'],
             'image' => [
                 'nullable',
                 'image',
@@ -149,9 +144,28 @@ class PackageController extends Controller
         ];
     }
 
-    private function parseFacilities(string $text): array
+
+    private function extractFacilities(array &$data): array
     {
-        return collect(preg_split('/\r\n|\r|\n/', $text))
+        $facilities = [];
+
+        foreach (array_keys(Package::FACILITY_GROUPS) as $key) {
+            $field = 'facilities_' . $key;
+            $items = $this->parseFacilities($data[$field] ?? '');
+
+            unset($data[$field]);
+
+            if ($items !== []) {
+                $facilities[$key] = $items;
+            }
+        }
+
+        return $facilities;
+    }
+
+    private function parseFacilities(?string $text): array
+    {
+        return collect(preg_split('/\r\n|\r|\n/', (string) $text))
             ->map(fn ($item) => trim($item))
             ->filter()
             ->values()

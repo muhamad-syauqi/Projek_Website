@@ -102,7 +102,7 @@
                         {{-- FASILITAS --}}
                         <div class="paket-tags">
 
-                            @forelse (array_slice($package->facilities ?? [], 0, 3) as $facility)
+                            @forelse (array_slice($package->facility_list, 0, 3) as $facility)
                                 <span>
                                     {{ $facility }}
                                     <b>✓</b>

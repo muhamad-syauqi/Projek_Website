@@ -52,14 +52,48 @@
             @error('description') <div class="msg">{{ $message }}</div> @enderror
         </div>
 
+        @php
+            $facilityGroups = $package->facility_groups;
+            $facilityFields = [
+                'dekorasi' => [
+                    'label' => 'Fasilitas Dekorasi',
+                    'rows' => 6,
+                    'placeholder' => "Dekorasi 6x3m\nPanggung Pelaminan 6x3\nMini Garden",
+                ],
+                'rias' => [
+                    'label' => 'Fasilitas Rias & Busana',
+                    'rows' => 6,
+                    'placeholder' => "Rias Pengantin CPW\nBaju Akad CPW & CPP\nHenna & Nail Art",
+                ],
+                'dokumentasi' => [
+                    'label' => 'Fasilitas Dokumentasi',
+                    'rows' => 4,
+                    'placeholder' => "1 Fotografer 1 Hari Kerja\n1 Videografer 1 Hari Kerja",
+                ],
+                'lainnya' => [
+                    'label' => 'Fasilitas Lainnya (opsional)',
+                    'rows' => 3,
+                    'placeholder' => "Catering, hiburan, dan lain-lain",
+                ],
+            ];
+        @endphp
+
         <div class="f">
-            <label for="facilities_text">Fasilitas</label>
-            <textarea id="facilities_text" name="facilities_text" rows="8"
-                      class="@error('facilities_text') invalid @enderror"
-                      placeholder="Dekorasi pelaminan&#10;Rias pengantin&#10;Dokumentasi">{{ old('facilities_text', implode("\n", $package->facilities ?? [])) }}</textarea>
-            <div class="help">Tulis satu fasilitas per baris.</div>
-            @error('facilities_text') <div class="msg">{{ $message }}</div> @enderror
+            <label>Fasilitas paket</label>
+            <div class="help">
+                Tulis satu fasilitas per baris. Kolom yang dikosongkan tidak akan tampil di halaman detail paket.
+            </div>
         </div>
+
+        @foreach ($facilityFields as $key => $field)
+            <div class="f">
+                <label for="facilities_{{ $key }}">{{ $field['label'] }}</label>
+                <textarea id="facilities_{{ $key }}" name="facilities_{{ $key }}" rows="{{ $field['rows'] }}"
+                          class="@error('facilities_'.$key) invalid @enderror"
+                          placeholder="{{ $field['placeholder'] }}">{{ old('facilities_'.$key, implode("\n", $facilityGroups[$key] ?? [])) }}</textarea>
+                @error('facilities_'.$key) <div class="msg">{{ $message }}</div> @enderror
+            </div>
+        @endforeach
     </div>
 
     {{-- KOLOM KANAN: foto + pengaturan --}}
