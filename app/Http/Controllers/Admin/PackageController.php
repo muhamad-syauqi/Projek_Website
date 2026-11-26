@@ -128,6 +128,9 @@ class PackageController extends Controller
             'description' => ['required', 'string', 'max:5000'],
             'facilities_dekorasi' => ['nullable', 'string', 'max:5000'],
             'facilities_rias' => ['nullable', 'string', 'max:5000'],
+            'facilities_hiburan' => ['nullable', 'string', 'max:5000'],
+            'facilities_upacara' => ['nullable', 'string', 'max:5000'],
+            'facilities_siraman' => ['nullable', 'string', 'max:5000'],
             'facilities_dokumentasi' => ['nullable', 'string', 'max:5000'],
             'facilities_lainnya' => ['nullable', 'string', 'max:5000'],
             'image' => [

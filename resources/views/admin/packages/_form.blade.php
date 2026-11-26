@@ -65,6 +65,21 @@
                     'rows' => 6,
                     'placeholder' => "Rias Pengantin CPW\nBaju Akad CPW & CPP\nHenna & Nail Art",
                 ],
+                'hiburan' => [
+                    'label' => 'Fasilitas Hiburan',
+                    'rows' => 6,
+                    'placeholder' => "Dangdut semi full\nOne player\nSound system",
+                ],
+                'upacara' => [
+                    'label' => 'Fasilitas Upacara Adat',
+                    'rows' => 6,
+                    'placeholder' => "Lengser mapag pengantin\nTari Rama Sinta\nSungkeman",
+                ],
+                'siraman' => [
+                    'label' => 'Fasilitas Siraman',
+                    'rows' => 5,
+                    'placeholder' => "Make up siraman\nBaju siraman\nKendi & gayung siraman",
+                ],
                 'dokumentasi' => [
                     'label' => 'Fasilitas Dokumentasi',
                     'rows' => 4,

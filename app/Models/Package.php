@@ -14,6 +14,9 @@ class Package extends Model
     public const FACILITY_GROUPS = [
         'dekorasi' => 'Dekorasi',
         'rias' => 'Rias & Busana',
+        'hiburan' => 'Hiburan',
+        'upacara' => 'Upacara',
+        'siraman' => 'Siraman',
         'dokumentasi' => 'Dokumentasi',
         'lainnya' => 'Fasilitas Lainnya',
     ];

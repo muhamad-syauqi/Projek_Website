@@ -2,8 +2,11 @@
     $groups = $package->facility_groups;
     $labels = \App\Models\Package::FACILITY_GROUPS;
 
-    // Bila hanya salah satu dari Dekorasi / Rias & Busana yang terisi, kartunya dibuat selebar penuh
-    $halfCount = count(array_intersect_key($groups, ['dekorasi' => 1, 'rias' => 1]));
+    $halfKeys = array_values(array_filter(
+        array_keys($groups),
+        fn ($k) => in_array($k, ['dekorasi', 'rias', 'hiburan', 'upacara', 'siraman'], true)
+    ));
+    $loneHalf = count($halfKeys) % 2 === 1 ? end($halfKeys) : null;
     $priceText = 'Rp. ' . number_format($package->price, 0, ',', '.');
 @endphp
 <!DOCTYPE html>
@@ -68,7 +71,7 @@
             @if (count($groups) > 0)
                 <div class="facility-grid">
                     @foreach ($groups as $key => $items)
-                        <article class="facility-card facility-{{ $key }}{{ in_array($key, ['dekorasi', 'rias'], true) && $halfCount === 1 ? ' is-wide' : '' }}">
+                        <article class="facility-card facility-{{ $key }}{{ $key === $loneHalf ? ' is-wide' : '' }}">
                             <h3>{{ $labels[$key] }}</h3>
 
                             <ul>
